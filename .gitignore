@@ -1,0 +1,3 @@
+gps-history/*
+node/gpsloop/node_modules/*
+node/gpsserver/node_modules/*

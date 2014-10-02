@@ -1,0 +1,10 @@
+{
+  "name": "nodepigps",
+  "version": "1.0.0",
+  "dependencies": {
+	"bancroft": "*",
+	"http": "*",
+	"fs": "*",
+	"querystring": "*"
+  }
+}
