@@ -12,6 +12,20 @@ If npm install fails, run
 
 	npm config set registry http://registry.npmjs.org/
 
+You should probably also manually download the latest node build
+and manually install it.
+
+The setup
+---------
+My Pi has a BU-353 gps antenna plugged into it.
+Seems to work out of the box.
+
+After installing the node pre-requisites and npm-install on each
+module, you should only need to edit each module and run gpsd-mounter.js
+
+gpsd-mounter checks for gpsd crashes, and antenna drop ins/outs. If detected
+it should relaunch gpsd with the correct device, and then relaunch gpsloop.
+
 
 License
 -------
