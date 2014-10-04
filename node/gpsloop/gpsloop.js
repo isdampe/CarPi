@@ -22,15 +22,37 @@ gpsd.on('connect', function(){
 });
 
 gpsd.on('location', function (location) {
-  console.log("GPSD/Bancroft hints at new location\nUpdating buffer.");
-  currentLocation = location;
-  locationBuffer.push( location );
+
+  console.log("GPSD/Bancroft hints at new location");
+
+  //Bancroft should be updated to only hint location if it has coordinates.
+  //We'll check for them manually.
+
+  if ( location.hasOwnProperty('latitude') && location.hasOwnProperty('longitude') && location.hasOwnProperty('altitude') ) {
+	//Check if they are valid.
+	if ( typeof (location.latitude) === "undefined" || typeof (location.longitude) === "undefined" ) {
+		console.log("No GPS Fix. No point doing anything.");
+	} else {
+		//Add to buffer.
+		console.log("Added fix to buffer");
+		currentLocation = location;
+		locationBuffer.push( location );
+	}
+  } else {
+	  console.log("Invalid JSON object");
+  }
+
 });
 
 setInterval(function(){
 
 	//Every 30 seconds, attempt to send the latest location to
 	//The server.
+
+	if (! currentLocation.hasOwnProperty('latitude') ) {
+		console.log("No fix to relay to server.");
+		return;
+	}
 
 	var post_data = querystring.stringify({
 		'loc': JSON.stringify(currentLocation)
