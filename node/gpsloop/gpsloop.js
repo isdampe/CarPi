@@ -2,7 +2,7 @@
 var updateServerEvery = 30;			//Update the last location to server every 30 seconds.
 var writeOutputBufferEvery = 60;	//Save to HDD every 60 seconds.
 var outputFilePath = "/home/pi/carpi/gps-history/";
-var serverHost = "localhost";
+var serverHost = "192.168.1.25";
 var serverPort = 6668;
 
 //Init GPSD link.
